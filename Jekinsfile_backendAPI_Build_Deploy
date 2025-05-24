@@ -13,9 +13,8 @@ pipeline {
             }
             steps {
                 sh '''
-                echo $HOME
-                    cd backendAPI
-                    mvn clean install
+                    echo $HOME
+                    ls -a $HOME
                 '''
             }
         }
