@@ -1,0 +1,14 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                sh '''
+                    cd backendAPI
+                    docker run --rm -v "$(pwd)":/backendAPI -v  "$HOME/.m2":/root/.m2 -w /backendAPI maven:3.9.9-eclipse-temurin-17 mvn clean install
+                '''
+            }
+        }
+    }
+}
