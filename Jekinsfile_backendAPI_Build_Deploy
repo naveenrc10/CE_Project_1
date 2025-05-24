@@ -29,7 +29,7 @@ pipeline {
             steps {
                 sh '''
                     cd backendAPI
-                    docker build -t naveenrc/backendapi:latest .
+                    docker build -t navchakravarthy/backendapi:latest .
                 '''
                 
             }
@@ -43,7 +43,7 @@ pipeline {
         }
         stage('Push Docker Image') {
             steps {
-                sh 'docker push naveenrc/backendapi:latest'
+                sh 'docker push navchakravarthy/backendapi:latest'
             }
         }
 
