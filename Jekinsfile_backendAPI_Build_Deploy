@@ -17,7 +17,7 @@ pipeline {
                     whoami
                     cd backendAPI
                     ls /app/.m2
-                    echo "test.txt" > /app/.m2
+                    echo "test.txt" > /app/.m2/test.txt
 
                 '''
             }
