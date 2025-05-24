@@ -15,6 +15,7 @@ pipeline {
                 sh '''
                     echo $HOME
                     ls -a $HOME
+                    whoami
                 '''
             }
         }
