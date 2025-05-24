@@ -16,8 +16,8 @@ pipeline {
                     ls -a $HOME
                     whoami
                     cd backendAPI
-                    ls /app/.m2
-                    echo "test.txt" > /app/.m2/test.txt
+                    mvn clean install -Dmaven.repo.local=/app/.m2/repository
+                   
 
                 '''
             }
