@@ -6,6 +6,8 @@ pipeline {
             agent {
                 docker {
                     image 'maven:3.9.9-eclipse-temurin-17'
+                    
+
                     reuseNode true
                 }
             }
@@ -14,7 +16,7 @@ pipeline {
                     echo $HOME
                     ls -a $HOME
                     whoami
-                    mvn -X | grep "Using local repository"
+                    mvn clean install
                 '''
             }
         }
