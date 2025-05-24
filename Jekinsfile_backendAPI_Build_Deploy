@@ -16,7 +16,8 @@ pipeline {
                     ls -a $HOME
                     whoami
                     cd backendAPI
-                    ls $HOME/.m2
+                    ls -l
+                    pwd
 
                 '''
             }
