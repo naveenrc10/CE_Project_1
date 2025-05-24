@@ -22,13 +22,6 @@ pipeline {
                 '''
             }
         }
-        stage("Build Docker Image)
-        {
-            sh '''{
-                
-                
-            }
-        }
-
+       
     }
 }
