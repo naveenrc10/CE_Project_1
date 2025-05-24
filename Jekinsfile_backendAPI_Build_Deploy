@@ -6,8 +6,6 @@ pipeline {
             agent {
                 docker {
                     image 'maven:3.9.9-eclipse-temurin-17'
-                    
-
                     reuseNode true
                 }
             }
@@ -17,7 +15,8 @@ pipeline {
                     ls -a $HOME
                     whoami
                     cd backendAPI
-                    mvn clean install
+                    mvn clean install -Dmaven.repo.local=/home/ubuntu/.m2/repository
+
                 '''
             }
         }
