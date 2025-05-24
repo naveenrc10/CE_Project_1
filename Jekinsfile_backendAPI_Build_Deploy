@@ -16,7 +16,7 @@ pipeline {
                     ls -a $HOME
                     whoami
                     cd backendAPI
-                    mvn clean install 
+                    ls $HOME/.m2
 
                 '''
             }
