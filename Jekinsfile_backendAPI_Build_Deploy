@@ -31,6 +31,17 @@ pipeline {
                 
             }
         }
+        stage('Login to Docker Hub') {
+           steps {
+                sh 'echo $DOCKER_CREDENTIALS_PSW | docker login -u $DOCKER_CREDENTIALS_USR --password-stdin'
+            }
+        }
+        stage('Push Docker Image') {
+            steps {
+                sh 'docker push naveenrc/backendapi:latest'
+            }
+        }
+
 
        
     }
