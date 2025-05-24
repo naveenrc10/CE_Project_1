@@ -17,11 +17,17 @@ pipeline {
                     whoami
                     cd backendAPI
                     mvn clean install -Dmaven.repo.local=/app/.m2/repository
-                    docker build -t naveenrc/backendAPI:latest .
+                    
 
                 '''
             }
         }
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t naveenrc/backendAPI:latest .'
+            }
+        }
+
        
     }
 }
