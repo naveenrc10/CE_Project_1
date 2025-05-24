@@ -18,6 +18,8 @@ services:
 
   my-jenkins:
     image: my-jenkins
+    security_opt:
+      - seccomp:unconfined
     build:
       context: .
     container_name: my-jenkins
