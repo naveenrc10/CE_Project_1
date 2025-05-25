@@ -3,13 +3,6 @@ pipeline {
      
     stages {
         stage('Terraform Refresh') {
-            agent {
-                docker {
-                    image 'hashicorp/terraform:light'
-                    agrs '--entrypoint='''
-                    reuseNode true
-                }
-            }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'aws-credentials-id', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
                     sh '''
