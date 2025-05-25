@@ -1,7 +1,20 @@
 pipeline {
     agent any
+    
      
     stages {
+        stage('Setup'){
+            steps{
+                bucket_name="terraform-state-2025-05-24"
+                if aws s3api head-bucket --bucket "$bucket_name" 2>/dev/null; then
+                    echo "Bucket exists!"
+                else
+                    echo "Bucket does not exist. Creating..."
+                    aws s3 mb "s3://$bucket_name"
+                fi
+
+            }
+        }
         stage('Terraform Refresh') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'aws-credentials-id', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
