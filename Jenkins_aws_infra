@@ -3,6 +3,11 @@ pipeline {
 
     stages {
         stage('Terraform Refresh') {
+             docker {
+                    image 'hashicorp/terraform:light'
+                    reuseNode true
+                }
+
             steps {
                 withCredentials([usernamePassword(credentialsId: 'aws-credentials-id', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
                     sh '''
@@ -16,6 +21,10 @@ pipeline {
             }
         }    
         stage('Initialize') {
+            docker {
+                    image 'hashicorp/terraform:light'
+                    reuseNode true
+            }
             steps {
                 
                 withCredentials([usernamePassword(credentialsId: 'your-aws-credentials-id', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
