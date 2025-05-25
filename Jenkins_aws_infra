@@ -6,7 +6,8 @@ pipeline {
         stage('Setup'){
             steps{
                 bucket_name="terraform-state-2025-05-24"
-                if aws s3api head-bucket --bucket "$bucket_name" 2>/dev/null; then
+                if [ $(aws s3 ls "s3://$bucket_name" | grep 'NoSuchBucket' &> /dev/null) == 0 ] 
+                then
                     echo "Bucket exists!"
                 else
                     echo "Bucket does not exist. Creating..."
