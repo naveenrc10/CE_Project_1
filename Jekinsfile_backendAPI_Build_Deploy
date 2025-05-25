@@ -9,19 +9,14 @@ pipeline {
             agent {
                 docker {
                     image 'maven:3.9.9-eclipse-temurin-17'
-                    args '-v /var/jenkins_home/.m2:/app/.m2'
+                    args '-v /home/ubuntu/.m2:/app/.m2'
                     reuseNode true
                 }
             }
             steps {
                 sh '''
-                    echo $HOME
-                    ls -a $HOME
-                    whoami
                     cd backendAPI
                     mvn clean install -Dmaven.repo.local=/app/.m2/repository
-                    
-
                 '''
             }
         }

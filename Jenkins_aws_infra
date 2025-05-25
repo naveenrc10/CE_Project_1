@@ -6,6 +6,7 @@ pipeline {
             agent {
                 docker {
                     image 'hashicorp/terraform:light'
+                    agrs '--entrypoint='''
                     reuseNode true
                 }
             }
