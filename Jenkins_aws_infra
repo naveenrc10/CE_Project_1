@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    
+     
     stages {
         stage('Terraform Refresh') {
             agent {
@@ -9,11 +9,6 @@ pipeline {
                     reuseNode true
                 }
             }
-           environment {
-                AWS_ACCESS_KEY_ID = $AWS_CREDENTIALS_PSW
-                AWS_SECRET_ACCESS_KEY = $AWS_CREDENTIALS_USR
-            }
-
             steps {
                 withCredentials([usernamePassword(credentialsId: 'aws-credentials-id', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
                     sh '''
