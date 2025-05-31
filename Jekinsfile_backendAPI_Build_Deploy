@@ -9,8 +9,8 @@ pipeline {
             
             steps {
                 sh '''
-                    whoami
-                    docker run --rm -v "/tmp/backendAPI":/backendAPI   -w /backendAPI maven:3.9.9-eclipse-temurin-17 mvn clean install
+                    cd backendAPI
+                    docker run --rm -v "$(pwd)":/backendAPI   -w /backendAPI maven:3.9.9-eclipse-temurin-17 mvn clean install
                 '''
             }
         }
