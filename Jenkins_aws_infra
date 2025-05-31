@@ -14,7 +14,7 @@ pipeline {
 
                      if aws s3 ls "$bucket_name | grep -q 'NoSuchBucket';then
                         echo "Bucket does not exist. Creating..."
-                        aws s3api create-bucket --bucket "$bucket_name" --region us-east-1 --create-bucket-configuration LocationConstraint=us-east-1
+                        aws s3 mb "s3://$bucket_name"
                     else
                         echo "Bucket exists!"
                     fi
