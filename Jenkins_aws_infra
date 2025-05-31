@@ -31,6 +31,8 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'aws-credentials-id', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
                     sh '''
                         echo ~
+                        ls -l -a ~/.ssh
+                        whoami
                         cd aws_infra_setup
                         terraform init -reconfigure
                         terraform refresh
