@@ -1,0 +1,37 @@
+---
+- name: Deploy Docker Container on EC2
+  hosts: ec2
+  become: yes
+  tasks:
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+        update_cache: yes
+
+    - name: Start Docker Service
+      systemd:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Add User to Docker Group
+      user:
+        name: ubuntu
+        groups: docker
+        append: yes
+
+    - name: Pull Latest Docker Image
+      docker_image:
+        name: navchakravarthy/backendapi
+        tag: latest
+        source: pull
+
+    - name: Run Docker Container
+      docker_container:
+        name: backend-api
+        image: navchakravarthy/backendapi:latest
+        state: started
+        restart_policy: always
+        ports:
+          - "8080:8080"
