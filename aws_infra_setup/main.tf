@@ -1,6 +1,6 @@
 resource "aws_key_pair" "backendMS_key" {
   key_name   = "backendMS"
-  public_key = file("/home/ubuntu/.ssh/id_rsa.pub")
+  public_key = file("~/.ssh/id_rsa.pub")
 }
 
 
