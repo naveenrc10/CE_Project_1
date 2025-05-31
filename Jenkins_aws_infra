@@ -11,7 +11,7 @@ pipeline {
             steps{
                withCredentials([usernamePassword(credentialsId: 'aws-credentials-id', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
                     sh '''
-                        bucket_name=terraform-state-2025-05-24
+                        bucket_name=terraform-state-2025-05-31
                         
                         if aws s3 ls "s3://$bucket_name"  2>&1 | grep -q 'NoSuchBucket';then
                             echo "Bucket does not exist. Creating..."
