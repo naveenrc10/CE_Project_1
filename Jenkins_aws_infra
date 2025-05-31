@@ -1,11 +1,15 @@
 pipeline {
     agent any
-    
+    parameters {
+        string(name: 'bucketname', defaultValue: 'terraform-state-2025-05-24"', description: 'Bucket Name')
+        
+    }
+
      
     stages {
         stage('Setup'){
             steps{
-                bucket_name="terraform-state-2025-05-24"
+                bucket_name=${params.bucketname}
                 if [ $(aws s3 ls "s3://$bucket_name" | grep 'NoSuchBucket' &> /dev/null) == 0 ] 
                 then
                     echo "Bucket exists!"
