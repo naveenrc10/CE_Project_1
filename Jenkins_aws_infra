@@ -33,19 +33,12 @@ pipeline {
                         cd aws_infra_setup
                         terraform init
                         terraform refresh
-                    '''
-                }
-            }
-        }    
-        stage('Terraform Apply') {
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'aws-credentials-id', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-                    sh '''
                         terraform apply -auto-approve
                     '''
                 }
             }
-        }  
+        }    
+        
         
     }
 }
