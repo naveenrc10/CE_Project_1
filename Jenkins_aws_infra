@@ -10,7 +10,7 @@ pipeline {
         stage('Setup'){
             steps{
                sh '''
-                    bucket_name=${params.bucketname}
+                    bucket_name=terraform-state-2025-05-24
 
                     if aws s3api head-bucket --bucket "$bucket_name" 2>&1 | grep -q 'Not Found'; then
                         echo "Bucket does not exist. Creating..."
