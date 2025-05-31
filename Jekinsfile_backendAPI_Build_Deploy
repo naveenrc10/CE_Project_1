@@ -41,7 +41,7 @@ pipeline {
                     sh '''
 
                             cd ansible_setup
-                            rm inventory.ini
+                            rm -f inventory.ini
                             echo "[ec2]" > inventory.ini
                             IPS=$(aws ec2 describe-instances --filters "Name=tag:appName,Values=backendMS-instance" --query "Reservations[*].Instances[*].PublicIpAddress" --output text)
                             for ip in $IPS; do
