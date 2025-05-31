@@ -19,6 +19,7 @@ pipeline {
                         else
                             echo "Bucket exists!"
                         fi
+                        echo ~
                     '''
                }
 
