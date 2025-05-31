@@ -3,7 +3,7 @@ variable "home" {
 }
 
 variable "instance_count" {
-  default = 1
+  default = 2
 }
 variable "VPC_ID" {
     default = "vpc-0efdf97bd6df112ba"
