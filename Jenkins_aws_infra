@@ -31,7 +31,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'aws-credentials-id', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
                     sh '''
                         cd aws_infra_setup
-                        terraform init
+                        terraform init -reconfigure
                         terraform refresh
                         terraform apply -auto-approve
                     '''
