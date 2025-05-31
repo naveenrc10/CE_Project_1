@@ -6,4 +6,8 @@ sudo apt-get install -y ansible unzip
 sudo snap install aws-cli --classic
 sudo snap install docker --classic
 
+sudo systemctl start docker
+sudo systemctl enable docker
 sudo docker run -d -p 8080:8080 navchakravarthy/backendapi:latest 
+
+
