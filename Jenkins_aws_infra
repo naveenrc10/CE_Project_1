@@ -12,7 +12,7 @@ pipeline {
                sh '''
                     bucket_name=terraform-state-2025-05-24
 
-                     if aws s3 ls "$bucket_name | grep -q 'NoSuchBucket';then
+                     if aws s3 ls "s3://$bucket_name" | grep -q 'NoSuchBucket';then
                         echo "Bucket does not exist. Creating..."
                         aws s3 mb "s3://$bucket_name"
                     else
