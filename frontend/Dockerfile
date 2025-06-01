@@ -5,7 +5,7 @@ FROM eclipse-temurin:17-jdk
 WORKDIR /app
 
 # Copy the JAR file into the container
-COPY ./target/Frontend.jar /app/Frontend.jar
+COPY ./target/frontend.jar /app/frontend.jar
 
 # Run the JAR file
-CMD ["java", "-jar", "/app/Frontend.jar"]
+CMD ["java", "-jar", "/app/frontend.jar"]
