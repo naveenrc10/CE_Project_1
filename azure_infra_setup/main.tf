@@ -170,5 +170,5 @@ resource "azurerm_monitor_autoscale_setting" "frontend_autoscale" {
 }
 
 output "frontend_port" {
-  value = azurerm_lb_nat_rule.azurerm_lb_nat_rule.frontend_port_start
+  value = azurerm_lb_nat_rule.ssh_nat_rule.frontend_port_start
 }
