@@ -2,6 +2,12 @@
 - name: Deploy Docker Container on EC2
   hosts: ec2
   become: yes
+
+  vars:
+    container_name: backend-api
+    image_name: navchakravarthy/backendapi:latest
+
+
   tasks:
     - name: Install Docker
       apt:
@@ -21,17 +27,29 @@
         groups: docker
         append: yes
 
-    - name: Pull Latest Docker Image
-      docker_image:
-        name: navchakravarthy/backendapi
-        tag: latest
+    - name: Remove the container if exists
+      community.docker.docker_container:
+        name: "{{ container_name }}"
+        state: absent
+        force_kill: true
+
+    - name: Remove the old image if exists
+      community.docker.docker_image:
+        name: "{{ image_name }}"
+        state: absent
+        force_absent: true
+
+
+    - name: Pull latest image
+      community.docker.docker_image:
+        name: "{{ image_name }}"
         source: pull
 
-    - name: Run Docker Container
-      docker_container:
-        name: backend-api
-        image: navchakravarthy/backendapi:latest
+    - name: Start container with latest image
+      community.docker.docker_container:
+        name: "{{ container_name }}"
+        image: "{{ image_name }}"
         state: started
         restart_policy: always
         ports:
-          - "8080:8080"
+          - "8080:8080"  # adjust ports as needed

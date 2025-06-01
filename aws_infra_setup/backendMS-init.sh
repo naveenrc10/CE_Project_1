@@ -13,4 +13,4 @@ sudo systemctl enable docker
 sudo usermod -aG docker ubuntu
 
 # Pull and run a Docker container
-sudo docker run -d -p 8080:8080 navchakravarthy/backendapi:latest
+sudo docker run -d -p 8080:8080 --name backend-api navchakravarthy/backendapi:latest
