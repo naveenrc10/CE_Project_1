@@ -172,3 +172,6 @@ resource "azurerm_monitor_autoscale_setting" "frontend_autoscale" {
 output "frontend_port" {
   value = azurerm_lb_nat_rule.ssh_nat_rule.frontend_port_start
 }
+output "lb_public_ip" {
+  value = azurerm_public_ip.frontend_lb_public_ip.ip_address
+}
