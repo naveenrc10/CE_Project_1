@@ -74,7 +74,7 @@ pipeline {
                         cat ~/.ssh/id_rsa.pub
                         terraform init -reconfigure
                         terraform plan
-                        #terraform apply -auto-approve
+                        terraform apply -auto-approve
                     '''
             }
         }
