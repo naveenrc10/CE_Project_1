@@ -1,10 +1,13 @@
 pipeline {
     agent any
+    parameters {
+        string(name: 'AZURE_SUBSCRIPTION_ID', defaultValue: '540d323c-567f-436f-bc90-d46ddb6bd027', description: 'Azure Subscription ID')
+    }
     environment {
         AZURE_APP_ID     = credentials('AZURE_APP_ID')
         AZURE_PASSWORD   = credentials('AZURE_PASSWORD')
         AZURE_TENANT_ID  = credentials('AZURE_TENANT_ID')
-        AZURE_SUBSCRIPTION_ID = '540d323c-567f-436f-bc90-d46ddb6bd027'
+        
     }
     stages {
         stage('Azure Login') {
@@ -67,6 +70,7 @@ pipeline {
                         sed -i "s/AZURE_APP_ID/$AZURE_APP_ID/g" provider.tf 
                         sed -i "s/AZURE_PASSWORD/$AZURE_PASSWORD/g" provider.tf
                         sed -i "s/AZURE_TENANT_ID/$AZURE_TENANT_ID/g" provider.tf
+                        sed -i "s/AZURE_SUBSCRIPTION_ID/$AZURE_SUBSCRIPTION_ID/g" provider.tf
                         #terraform init -reconfigure
                         #terraform refresh
                         #terraform apply -auto-approve
