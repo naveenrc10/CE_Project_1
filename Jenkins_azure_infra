@@ -21,7 +21,7 @@ pipeline {
         }
         stage('Check Resources') {
             steps {
-                sh '''
+                    sh '''
                     RESOURCE_GROUP="terraform-rg"
                     STORAGE_ACCOUNT="tfstatenaveen12345"
                     CONTAINER_NAME="terraform-state"
@@ -54,12 +54,12 @@ pipeline {
                     else
                         echo "Storage Container already exists."
                     fi
-                '''
+                    '''
             }
             
             stage('Terraform Refresh') {
-            steps {
-                sh '''
+                steps {
+                    sh '''
                         cd azure_infra_setup
                         sed -i "s/AZURE_APP_ID/$AZURE_APP_ID/g" provider.tf 
                         sed -i "s/AZURE_PASSWORD/$AZURE_PASSWORD/g" provider.tf
@@ -70,7 +70,7 @@ pipeline {
                     '''
                 }
             }
-        }    
+         
         }
     }
 }
