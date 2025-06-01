@@ -125,8 +125,8 @@ resource "azurerm_linux_virtual_machine_scale_set" "frontend_vmss" {
 
   admin_ssh_key {
     username   = "ubuntu"
-    public_key = file(var.ssh_public_key)  # Path to your public key
-  }
+    public_key = file(var.ssh_public_key)   # Path to your public key
+  } 
  
 }
 
