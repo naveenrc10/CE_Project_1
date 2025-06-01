@@ -54,10 +54,10 @@ pipeline {
                                     echo ""
                                 fi
                             done
-                    '''
+                      '''
                  }
-            }
         }
+        
 
 
        
