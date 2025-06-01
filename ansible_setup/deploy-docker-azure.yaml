@@ -1,10 +1,10 @@
 ---
 - name: Deploy Docker Container on EC2
-  hosts: ec2
+  hosts: azure_vms
   become: yes
 
   vars:
-    container_name: backend-api
+    container_name: frontend
     image_name:  navchakravarthy/frontend:latest
 
 
