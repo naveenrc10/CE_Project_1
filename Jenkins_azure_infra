@@ -29,7 +29,7 @@ pipeline {
                     # Check if Resource Group exists
                     RG_EXISTS=$(az group exists --name $RESOURCE_GROUP)
 
-                    if [ ! $RG_EXISTS ]; then
+                    if [ ! $RG_EXISTS == false]; then
                         echo "Creating Resource Group: $RESOURCE_GROUP"
                         az group create --name $RESOURCE_GROUP --location eastus
                     else
