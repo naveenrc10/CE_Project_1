@@ -44,7 +44,6 @@ pipeline {
                             IP=$(az network public-ip show --name frontend-lb-ip --resource-group frontend-rg  --query "ipAddress" --output tsv)
                             START_PORT=50022
                             END_PORT=50025
-                            rm -f azure_inventory.ini
                             echo "[azure_vms]" > azure_inventory.ini
                             for PORT in $(seq $START_PORT $END_PORT); do
                                 output=$(timeout 3 telnet $IP $PORT 2>/dev/null | grep -q "Connected" && echo "Open" || echo "Closed")
@@ -54,6 +53,7 @@ pipeline {
                                     echo ""
                                 fi
                             done
+                            ansible-playbook -i azure_inventory.ini deploy-docker.yaml 
                       '''
                  }
         }
