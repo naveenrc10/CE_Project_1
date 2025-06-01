@@ -38,9 +38,15 @@ pipeline {
 
                     # Check if Storage Account exists
                     SA_EXISTS=$(az storage account show --name $STORAGE_ACCOUNT --resource-group $RESOURCE_GROUP --query "name" --output tsv 2>/dev/null || true)
-                    echo "SA_EXISTS=$SA_EXISTS"
+                    if [ -z "$SA_EXISTS" ]; then
+                        echo "Creating Storage Account: $STORAGE_ACCOUNT"
+                        az storage account create --name $STORAGE_ACCOUNT --resource-group $RESOURCE_GROUP --sku Standard_LRS --encryption-services blob
+                    else
+                        echo "Storage Account already exists"
+                    fi
+
                     # Check if Container exists
-                    CONTAINER_EXISTS=$(az storage container show --name $CONTAINER_NAME --account-name $STORAGE_ACCOUNT --query "name" --output tsv 2>/dev/null)
+                    CONTAINER_EXISTS=$(az storage container show --name $CONTAINER_NAME --account-name $STORAGE_ACCOUNT --query "name" --output tsv 2>/dev/null || true)
 
                     if [ -z "$CONTAINER_EXISTS" ]; then
                         echo "Creating Storage Container: $CONTAINER_NAME"
