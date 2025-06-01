@@ -1,0 +1,59 @@
+pipeline {
+    agent any
+    environment {
+        DOCKER_CREDENTIALS = credentials('dockerhub')
+    }
+
+    stages {
+        stage('Build') {
+            
+            steps {
+                sh '''
+                    cd frontend
+                    docker run --rm -v "$(pwd)":/app  -v  "$HOME/.m2":/root/.m2  -w /app maven:3.9.9-eclipse-temurin-17 mvn clean install -Dmaven.repo.local=/root/.m2
+                '''
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+                sh '''
+                    cd frontend
+                    docker build -t navchakravarthy/frontend:latest .
+                '''
+                
+            }
+        }
+        stage('Login to Docker Hub') {
+           steps {
+               sh 'echo $DOCKER_CREDENTIALS_PSW | docker login -u $DOCKER_CREDENTIALS_USR --password-stdin'
+                
+
+            }
+        }
+        stage('Push Docker Image') {
+            steps {
+                sh 'docker push navchakravarthy/frontend:latest'
+            }
+        }
+        /*stage("Generate Ansible Config file"){
+            steps{
+                 withCredentials([usernamePassword(credentialsId: 'aws-credentials-id', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                    sh '''
+
+                            cd ansible_setup
+                            rm -f inventory.ini
+                            echo "[ec2]" > inventory.ini
+                            IPS=$(aws ec2 describe-instances --region us-east-1 --filters "Name=tag:appName,Values=backendMS-instance" --query "Reservations[*].Instances[*].PublicIpAddress" --output text )
+                            for ip in $IPS; do
+                                echo "$ip ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/id_rsa" >> inventory.ini
+                            done
+                            ansible-playbook -i inventory.ini deploy-docker.yaml 
+                    '''
+                 }
+            }
+        }*/
+
+
+       
+    }
+}
