@@ -45,7 +45,7 @@ pipeline {
                             START_PORT=50022
                             END_PORT=50025
                             rm -f azure_inventory.ini
-                            echo "[azure_vms]" > inventory.ini
+                            echo "[azure_vms]" > azure_inventory.ini
                             for PORT in $(seq $START_PORT $END_PORT); do
                                 output=$(timeout 3 telnet $IP $PORT 2>/dev/null | grep -q "Connected" && echo "Open" || echo "Closed")
                                 if [ "$output" = "Open" ]; then
