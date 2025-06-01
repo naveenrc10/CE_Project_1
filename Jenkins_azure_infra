@@ -71,7 +71,7 @@ pipeline {
                         sed -i "s/AZURE_PASSWORD/$AZURE_PASSWORD/g" provider.tf
                         sed -i "s/AZURE_TENANT_ID/$AZURE_TENANT_ID/g" provider.tf
                         sed -i "s/AZURE_SUBSCRIPTION_ID/$AZURE_SUBSCRIPTION_ID/g" provider.tf
-                        #terraform init -reconfigure
+                        terraform init -reconfigure
                         #terraform refresh
                         #terraform apply -auto-approve
                     '''
