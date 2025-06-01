@@ -57,8 +57,11 @@ pipeline {
                     '''
             }
             
-            stage('Terraform Refresh') {
-                steps {
+            
+         
+        }
+        stage('Terraform Refresh') {
+            steps {
                     sh '''
                         cd azure_infra_setup
                         sed -i "s/AZURE_APP_ID/$AZURE_APP_ID/g" provider.tf 
@@ -68,9 +71,7 @@ pipeline {
                         #terraform refresh
                         #terraform apply -auto-approve
                     '''
-                }
             }
-         
         }
     }
 }
