@@ -35,23 +35,29 @@ pipeline {
                 sh 'docker push navchakravarthy/frontend:latest'
             }
         }
-        /*stage("Generate Ansible Config file"){
+        stage("Generate Ansible Config file"){
             steps{
-                 withCredentials([usernamePassword(credentialsId: 'aws-credentials-id', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                 
                     sh '''
 
                             cd ansible_setup
+                            IP=$(az network public-ip show --name frontend-lb-ip --resource-group frontend-rg  --query "ipAddress" --output tsv)
+                            START_PORT=50022
+                            END_PORT=50025
                             rm -f inventory.ini
-                            echo "[ec2]" > inventory.ini
-                            IPS=$(aws ec2 describe-instances --region us-east-1 --filters "Name=tag:appName,Values=backendMS-instance" --query "Reservations[*].Instances[*].PublicIpAddress" --output text )
-                            for ip in $IPS; do
-                                echo "$ip ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/id_rsa" >> inventory.ini
+                            echo "[azure_vms]" > inventory.ini
+                            for PORT in $(seq $START_PORT $END_PORT); do
+                                output=$(timeout 3 telnet $IP $PORT 2>/dev/null | grep -q "Connected" && echo "Open" || echo "Closed")
+                                if [ "$output" == "Open" ]; then
+                                    echo "ansible_host=$IP ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/id_rsa ansible_port=$PORT" >> inventory.ini
+                                else
+                                    echo ""
+                                fi
                             done
-                            ansible-playbook -i inventory.ini deploy-docker.yaml 
                     '''
                  }
             }
-        }*/
+        }
 
 
        
