@@ -7,6 +7,16 @@ terraform {
   }
 }
 
+terraform {
+  backend "azurerm" {
+    resource_group_name  = "terraform-rg"
+    storage_account_name = "tfstatenaveen12345"
+    container_name       = "terraform-state"
+    key                  = "terraform.tfstate"
+  }
+}
+
+
 provider "azurerm" {
 
   subscription_id = "AZURE_SUBSCRIPTION_ID"

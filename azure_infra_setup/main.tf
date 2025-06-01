@@ -1,5 +1,5 @@
-resource "azurerm_resource_group" "rg" {
-  name     = "terraform-rg"
+data "azurerm_resource_group" "rg" {
+  name     = "frontend-rg"
   location = "East US"
 }
 
