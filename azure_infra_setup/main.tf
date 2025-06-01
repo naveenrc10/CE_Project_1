@@ -1,4 +1,4 @@
-data "azurerm_resource_group" "rg" {
+resource "azurerm_resource_group" "rg" {
   name     = "frontend-rg"
   location = "East US"
 }
