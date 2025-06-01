@@ -44,12 +44,12 @@ pipeline {
                             IP=$(az network public-ip show --name frontend-lb-ip --resource-group frontend-rg  --query "ipAddress" --output tsv)
                             START_PORT=50022
                             END_PORT=50025
-                            rm -f inventory.ini
+                            rm -f azure_inventory.ini
                             echo "[azure_vms]" > inventory.ini
                             for PORT in $(seq $START_PORT $END_PORT); do
                                 output=$(timeout 3 telnet $IP $PORT 2>/dev/null | grep -q "Connected" && echo "Open" || echo "Closed")
-                                if [ "$output" == "Open" ]; then
-                                    echo "ansible_host=$IP ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/id_rsa ansible_port=$PORT" >> inventory.ini
+                                if [ "$output" = "Open" ]; then
+                                    echo "ansible_host=$IP ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/id_rsa ansible_port=$PORT" >> azure_inventory.ini
                                 else
                                     echo ""
                                 fi
