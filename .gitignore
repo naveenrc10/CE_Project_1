@@ -1,6 +1,7 @@
 /backendAPI/target
 /aws_infra_setup/.terraform
 /aws_infra_setup/.terraform.lock.hcl
-
+/azure_infra_setup/.terraform
+/azure_infra_setup/.terraform.lock.hcl
 /backendAPI/target
 /frontend/target
