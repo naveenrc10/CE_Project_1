@@ -23,7 +23,7 @@ pipeline {
             steps {
                 sh '''
                     RESOURCE_GROUP="terraform-rg"
-                    STORAGE_ACCOUNT="tfstate12345"
+                    STORAGE_ACCOUNT="tfstateNaveen12345"
                     CONTAINER_NAME="terraform-state"
 
                     # Check if Resource Group exists
