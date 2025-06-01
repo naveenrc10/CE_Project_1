@@ -56,6 +56,18 @@ pipeline {
                     fi
                 '''
             }
+            
+            stage('Terraform Refresh') {
+            steps {
+                sh '''
+                        cd azure_infra_setup
+                        terraform init -reconfigure
+                        terraform refresh
+                        terraform apply -auto-approve
+                    '''
+                }
+            }
+        }    
         }
     }
 }
