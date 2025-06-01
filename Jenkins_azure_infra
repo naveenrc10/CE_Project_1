@@ -42,7 +42,7 @@ pipeline {
                         echo "Creating Storage Account: $STORAGE_ACCOUNT"
                         az storage account create --name $STORAGE_ACCOUNT --resource-group $RESOURCE_GROUP --sku Standard_LRS --encryption-services blob
                     else
-                        echo "Storage Account already exists."
+                        echo "Storage Account already exists"
                     fi
 
                     # Check if Container exists
