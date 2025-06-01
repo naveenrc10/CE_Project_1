@@ -83,7 +83,7 @@ resource "azurerm_network_security_group" "frontend_nsg" {
 }
 
 data "local_file" "startup_script" {
-  filename = "Frontend-init.sh"
+  filename = "${path.module}/Frontend-init.sh"
 }
 
 
