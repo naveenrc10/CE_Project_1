@@ -53,7 +53,7 @@ pipeline {
                                     echo ""
                                 fi
                             done
-                            ansible-playbook -i azure_inventory.ini deploy-docker.yaml 
+                            ansible-playbook -i azure_inventory.ini deploy-docker-azure.yaml 
                       '''
                  }
         }
