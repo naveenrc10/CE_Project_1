@@ -57,7 +57,19 @@ pipeline {
                     '''
             }
             
-           
+            stage('Terraform Refresh') {
+                steps {
+                    sh '''
+                        cd azure_infra_setup
+                        sed -i "s/AZURE_APP_ID/$AZURE_APP_ID/g" provider.tf 
+                        sed -i "s/AZURE_PASSWORD/$AZURE_PASSWORD/g" provider.tf
+                        sed -i "s/AZURE_TENANT_ID/$AZURE_TENANT_ID/g" provider.tf
+                        #terraform init -reconfigure
+                        #terraform refresh
+                        #terraform apply -auto-approve
+                    '''
+                }
+            }
          
         }
     }
