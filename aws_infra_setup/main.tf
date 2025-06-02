@@ -192,7 +192,7 @@ resource "aws_lb_target_group" "backendMS_tg" {
     protocol = "HTTP"
     vpc_id = aws_vpc.backendMS_vpc.id
     health_check {
-        path                = "/api/hello"
+        path                = "/"
         protocol            = "HTTP"
         interval            = 30
         timeout             = 5
