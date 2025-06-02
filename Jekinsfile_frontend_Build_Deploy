@@ -30,11 +30,11 @@ pipeline {
 
             }
         }
-        stage('Push Docker Image') {
+        /*stage('Push Docker Image') {
             steps {
-                /*sh 'docker push navchakravarthy/frontend:latest'*/
+                sh 'docker push navchakravarthy/frontend:latest'
             }
-        }
+        }*/
         stage("Generate Ansible Config file"){
             steps{
                  
