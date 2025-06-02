@@ -41,13 +41,13 @@ pipeline {
                     sh '''
 
                             cd ansible_setup
-                            rm -f inventory.ini
-                            echo "[ec2]" > inventory.ini
+                            rm -f aws_inventory.ini
+                            echo "[ec2]" > aws_inventory.ini
                             IPS=$(aws ec2 describe-instances --region us-east-1 --filters "Name=tag:appName,Values=backendMS-instance" --query "Reservations[*].Instances[*].PublicIpAddress" --output text )
                             for ip in $IPS; do
-                                echo "$ip ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/id_rsa" >> inventory.ini
+                                echo "$ip ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/id_rsa" >> aws_inventory.ini
                             done
-                            ansible-playbook -i inventory.ini deploy-docker.yaml 
+                            ansible-playbook -i aws_inventory.ini deploy-docker-awsyaml 
                     '''
                  }
             }
