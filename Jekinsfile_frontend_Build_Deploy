@@ -60,7 +60,15 @@ pipeline {
                       '''
                  }
         }
-        
+        stage("Run Ansible Config"){
+            steps{
+                 
+                    sh '''
+          
+                            ansible-playbook -i azure_inventory.ini deploy-docker-azure.yaml 
+                      '''
+                 }
+        }
 
 
        
