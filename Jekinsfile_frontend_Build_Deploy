@@ -64,7 +64,7 @@ pipeline {
             steps{
                  
                     sh '''
-                             cd ansible_setup
+                            cd ansible_setup
                             ansible-playbook -i azure_inventory.ini deploy-docker-azure.yaml 
                       '''
                  }
