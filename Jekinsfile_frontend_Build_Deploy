@@ -5,7 +5,7 @@ pipeline {
     }
 
     stages {
-       /* stage('Build') {
+       stage('Build') {
             
             steps {
                 sh '''
@@ -13,8 +13,8 @@ pipeline {
                     docker run --rm -v "$(pwd)":/app  -v  "$HOME/.m2":/root/.m2  -w /app maven:3.9.9-eclipse-temurin-17 mvn clean install -Dmaven.repo.local=/root/.m2
                 '''
             }
-        }*/
-       /* stage('Build Docker Image') {
+        }
+        stage('Build Docker Image') {
             steps {
                 sh '''
                     cd frontend
@@ -22,19 +22,19 @@ pipeline {
                 '''
                 
             }
-        }*/
-        /*stage('Login to Docker Hub') {
+        }
+        stage('Login to Docker Hub') {
            steps {
                sh 'echo $DOCKER_CREDENTIALS_PSW | docker login -u $DOCKER_CREDENTIALS_USR --password-stdin'
                 
 
             }
-        }*/
-        /*stage('Push Docker Image') {
+        }
+        stage('Push Docker Image') {
             steps {
                 sh 'docker push navchakravarthy/frontend:latest'
             }
-        }*/
+        }
         stage("Generate Ansible Config file"){
             steps{
                  
