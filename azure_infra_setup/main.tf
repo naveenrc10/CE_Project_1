@@ -49,7 +49,7 @@ resource "azurerm_lb_probe" "frontend_probe" {
   name            = "http-probe"
   port            = 8080
   protocol        = "Http"
-  request_path    = "/api/hello"
+  request_path    = "/"
   
 }
 
