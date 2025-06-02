@@ -217,6 +217,12 @@ resource "aws_autoscaling_group" "backendMS_acg"{
   
 }
 
+output "backendMS_lb_dns_name" {
+  value       = aws_lb.backendMS_lb.dns_name
+  description = "DNS name of the Load Balancer"
+}
+
+
 
 /*
   
