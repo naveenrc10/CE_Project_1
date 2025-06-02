@@ -5,7 +5,7 @@ pipeline {
     }
 
     stages {
-        stage('Build') {
+       /* stage('Build') {
             
             steps {
                 sh '''
@@ -13,8 +13,8 @@ pipeline {
                     docker run --rm -v "$(pwd)":/app  -v  "$HOME/.m2":/root/.m2  -w /app maven:3.9.9-eclipse-temurin-17 mvn clean install -Dmaven.repo.local=/root/.m2
                 '''
             }
-        }
-        stage('Build Docker Image') {
+        }*/
+       /* stage('Build Docker Image') {
             steps {
                 sh '''
                     cd frontend
@@ -22,14 +22,14 @@ pipeline {
                 '''
                 
             }
-        }
-        stage('Login to Docker Hub') {
+        }*/
+        /*stage('Login to Docker Hub') {
            steps {
                sh 'echo $DOCKER_CREDENTIALS_PSW | docker login -u $DOCKER_CREDENTIALS_USR --password-stdin'
                 
 
             }
-        }
+        }*/
         /*stage('Push Docker Image') {
             steps {
                 sh 'docker push navchakravarthy/frontend:latest'
@@ -51,7 +51,7 @@ pipeline {
                                 output=$(timeout 3 telnet $IP $PORT 2>/dev/null | grep -q "Connected" && echo "Open" || echo "Closed")
                                 if [ "$output" = "Open" ]; then
                                     echo "system$index ansible_host=$IP ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/id_rsa ansible_port=$PORT" >> azure_inventory.ini
-                                    index=$index + 1
+                                    index=$((index + 1))
                                 else
                                     echo ""
                                 fi
